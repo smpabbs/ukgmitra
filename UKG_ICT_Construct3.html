@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UKG ICT SMP IT Al Firdaus Purwodadi — Construct 3</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#0a0e17;color:#e2e8f0;line-height:1.6}
+.hero{
+  background:linear-gradient(135deg,#0a0e17 0%,#0f1923 50%,#0d1117 100%);
+  padding:50px 30px 40px;text-align:center;position:relative;overflow:hidden;
+  border-bottom:2px solid rgba(200,164,92,.2)
+}
+.hero::before{
+  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+  background:radial-gradient(circle at 30% 50%,rgba(45,219,191,.04) 0%,transparent 50%),
+             radial-gradient(circle at 70% 50%,rgba(200,164,92,.04) 0%,transparent 50%);
+  pointer-events:none
+}
+.hero-badge{
+  display:inline-block;background:rgba(45,219,191,.12);border:1px solid rgba(45,219,191,.25);
+  color:#2dd4bf;padding:5px 16px;border-radius:20px;font-size:12px;font-weight:600;
+  letter-spacing:.5px;margin-bottom:14px;text-transform:uppercase
+}
+.hero h1{
+  font-size:clamp(22px,3.2vw,38px);font-weight:800;color:#fff;
+  letter-spacing:-1px;margin-bottom:6px;position:relative
+}
+.hero h1 span{color:#c8a45c}
+.hero-sub{
+  font-size:clamp(13px,1.8vw,16px);color:#94a3b8;max-width:600px;margin:0 auto 12px
+}
+.hero-meta{
+  display:flex;justify-content:center;gap:24px;flex-wrap:wrap;
+  font-size:12px;color:#64748b;margin-top:10px
+}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+.hero-meta .dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:#2dd4bf}
+.container{max-width:880px;margin:0 auto;padding:30px 20px 60px}
+
+/* ── CARDS ── */
+.card{
+  background:linear-gradient(135deg,#111927,#0f1a24);
+  border:1px solid rgba(200,164,92,.1);border-radius:14px;
+  padding:28px 30px;margin-bottom:28px;position:relative;overflow:hidden
+}
+.card-accent{position:absolute;top:0;left:0;width:4px;height:100%}
+.card-accent.gold{background:#c8a45c}
+.card-accent.teal{background:#2dd4bf}
+.card-accent.pink{background:#f472b6}
+.card-accent.purple{background:#a78bfa}
+.card-accent.blue{background:#60a5fa}
+.card-accent.green{background:#4ade80}
+.card-accent.orange{background:#fb923c}
+.card-accent.red{background:#f87171}
+.card h2{
+  font-size:20px;font-weight:700;color:#fff;margin-bottom:16px;
+  display:flex;align-items:center;gap:10px
+}
+.card h2 .num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:8px;
+  font-size:13px;font-weight:700;flex-shrink:0
+}
+.num.gold{background:rgba(200,164,92,.2);color:#c8a45c}
+.num.teal{background:rgba(45,219,191,.2);color:#2dd4bf}
+.num.pink{background:rgba(244,114,182,.2);color:#f472b6}
+.num.purple{background:rgba(167,139,250,.2);color:#a78bfa}
+.num.blue{background:rgba(96,165,250,.2);color:#60a5fa}
+.num.green{background:rgba(74,222,128,.2);color:#4ade80}
+.num.orange{background:rgba(251,146,60,.2);color:#fb923c}
+.num.red{background:rgba(248,113,113,.2);color:#f87171}
+.card h3{
+  font-size:15px;font-weight:600;color:#c8a45c;margin:18px 0 8px
+}
+.card h3:first-of-type{margin-top:0}
+.card p,.card li{font-size:14px;color:#cbd5e1;margin-bottom:6px}
+.card ul,.card ol{padding-left:18px;margin:6px 0 12px}
+.card li{margin-bottom:3px}
+.card li strong{color:#e2e8f0}
+.card strong.highlight{color:#2dd4bf}
+.card .story-box{
+  background:rgba(45,219,191,.06);border:1px solid rgba(45,219,191,.12);
+  border-radius:10px;padding:18px;margin:10px 0;font-size:14px;color:#e2e8f0;line-height:1.7
+}
+.card .story-box .quote{color:#2dd4bf;font-size:16px;font-weight:600}
+
+/* ── TABLE ── */
+.table-wrap{overflow-x:auto;margin:12px 0 6px;border-radius:8px;border:1px solid rgba(200,164,92,.08)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:rgba(45,219,191,.08)}
+th{padding:10px 14px;text-align:left;font-weight:600;color:#2dd4bf;border-bottom:1px solid rgba(45,219,191,.15)}
+td{padding:9px 14px;border-bottom:1px solid rgba(200,164,92,.06);color:#cbd5e1}
+tr:last-child td{border-bottom:none}
+
+/* ── TWO-COLUMN ── */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:10px 0}
+@media(max-width:640px){.two-col{grid-template-columns:1fr}}
+.two-col>div{
+  background:rgba(200,164,92,.03);border:1px solid rgba(200,164,92,.1);
+  border-radius:10px;padding:18px
+}
+.two-col h4{font-size:14px;font-weight:600;margin-bottom:6px}
+.two-col .icon{font-size:28px;margin-bottom:4px;display:block}
+.two-col p{font-size:13px;color:#94a3b8;margin:0}
+
+/* ── STAGE BANNER ── */
+.stage-banner{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 18px;border-radius:10px;margin-bottom:14px;font-weight:600;font-size:15px
+}
+.stage-banner.s1{background:rgba(45,219,191,.08);border:1px solid rgba(45,219,191,.15);color:#2dd4bf}
+.stage-banner.s2{background:rgba(200,164,92,.08);border:1px solid rgba(200,164,92,.15);color:#c8a45c}
+.stage-banner .badge{
+  display:inline-block;padding:3px 12px;border-radius:6px;font-size:12px;font-weight:700;flex-shrink:0
+}
+.stage-banner.s1 .badge{background:#2dd4bf;color:#0a0e17}
+.stage-banner.s2 .badge{background:#c8a45c;color:#0a0e17}
+.stage-banner .date{font-size:12px;font-weight:400;color:#64748b;margin-left:auto}
+
+/* ── LAYOUT ── */
+.layout-art{
+  background:rgba(0,0,0,.3);border:1px solid rgba(45,219,191,.12);
+  border-radius:10px;padding:20px;margin:12px 0;font-family:'JetBrains Mono',monospace;
+  font-size:11px;line-height:1.5;overflow-x:auto;white-space:pre;color:#94a3b8
+}
+.layout-art .t{color:#2dd4bf}
+.layout-art .g{color:#c8a45c}
+.layout-art .r{color:#f87171}
+.layout-art .p{color:#a78bfa}
+.layout-art .gr{color:#4ade80}
+.layout-art .lg{color:#94a3b8}
+
+/* ── TAG ── */
+.tag{
+  display:inline-block;padding:2px 8px;border-radius:5px;font-size:11px;font-weight:600;margin:1px
+}
+.tag-gold{background:rgba(200,164,92,.15);color:#c8a45c}
+.tag-teal{background:rgba(45,219,191,.12);color:#2dd4bf}
+.tag-pink{background:rgba(244,114,182,.12);color:#f472b6}
+.tag-purple{background:rgba(167,139,250,.12);color:#a78bfa}
+.tag-green{background:rgba(74,222,128,.12);color:#4ade80}
+.tag-red{background:rgba(248,113,113,.12);color:#f87171}
+.tag-orange{background:rgba(251,146,60,.12);color:#fb923c}
+
+/* ── RULES GRID ── */
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+@media(max-width:640px){.rules-grid{grid-template-columns:1fr}}
+.rule-box{
+  padding:16px;border-radius:10px;font-size:13px;line-height:1.6
+}
+.rule-box.allow{border:1px solid rgba(45,219,191,.15);background:rgba(45,219,191,.04)}
+.rule-box.deny{border:1px solid rgba(248,113,113,.15);background:rgba(248,113,113,.04)}
+.rule-box .rule-title{font-size:14px;font-weight:700;margin-bottom:8px}
+.rule-box.allow .rule-title{color:#2dd4bf}
+.rule-box.deny .rule-title{color:#f87171}
+.rule-box ul{padding-left:16px}
+.rule-box li{color:#94a3b8;margin-bottom:4px;font-size:13px}
+
+/* ── FORM ── */
+.form-section{
+  background:rgba(45,219,191,.03);border:2px solid rgba(45,219,191,.15);
+  border-radius:14px;padding:24px 28px;margin:10px 0
+}
+.form-section.closed{
+  border-color:rgba(248,113,113,.2);background:rgba(248,113,113,.03)
+}
+.form-section h3{color:#2dd4bf;font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.form-section.closed h3{color:#f87171}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:13px;font-weight:600;color:#cbd5e1;margin-bottom:4px}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;padding:10px 14px;border-radius:8px;border:1px solid rgba(200,164,92,.15);
+  background:rgba(0,0,0,.25);color:#e2e8f0;font-family:'Inter',sans-serif;font-size:14px;
+  transition:.2s
+}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+  outline:none;border-color:#2dd4bf;box-shadow:0 0 0 2px rgba(45,219,191,.15)
+}
+.form-group input[type=file]{
+  padding:8px;border-style:dashed;cursor:pointer
+}
+.form-group input[type=file]::file-selector-button{
+  padding:6px 14px;border-radius:6px;border:none;background:rgba(45,219,191,.15);
+  color:#2dd4bf;font-weight:600;font-size:12px;cursor:pointer;margin-right:10px
+}
+.form-group textarea{resize:vertical;min-height:70px}
+.form-group .hint{font-size:11px;color:#64748b;margin-top:4px}
+.submit-btn{
+  width:100%;padding:12px;border-radius:8px;border:none;
+  background:linear-gradient(135deg,#2dd4bf,#1a9e8c);color:#0a0e17;
+  font-size:16px;font-weight:700;cursor:pointer;transition:.2s
+}
+.submit-btn:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(45,219,191,.2)}
+.submit-btn:disabled{
+  background:#475569;color:#94a3b8;cursor:not-allowed;transform:none;box-shadow:none
+}
+.form-status{
+  text-align:center;padding:16px;border-radius:8px;font-size:14px;font-weight:600
+}
+.form-status.open{background:rgba(45,219,191,.08);color:#2dd4bf;border:1px solid rgba(45,219,191,.12)}
+.form-status.closed{background:rgba(248,113,113,.08);color:#f87171;border:1px solid rgba(248,113,113,.12)}
+.btn-form:hover{transform:scale(1.03);opacity:.9}
+.btn-form:active{transform:scale(.97)}
+
+
+/* ── FOOTER ── */
+.footer{
+  text-align:center;padding:30px 20px;
+  border-top:1px solid rgba(200,164,92,.08);margin-top:10px
+}
+.footer .logo{font-size:13px;font-weight:700;color:#c8a45c;margin-bottom:3px}
+.footer p{font-size:12px;color:#475569}
+
+@media(max-width:640px){
+  .hero{padding:30px 16px 28px}
+  .card{padding:22px 18px}
+  .form-section{padding:18px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  .hero{background:#f8f9fa;border-bottom:2px solid #c8a45c;padding:24px}
+  .hero h1,.hero h1 span{color:#111}
+  .card{background:#fff;border:1px solid #ddd;break-inside:avoid}
+  .card h2{color:#111}
+  .form-section{border-color:#ddd}
+  .footer{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-badge">📋 Uji Kompetensi Guru ICT</div>
+  <h1>UKG ICT <span>SMP IT Al Firdaus</span> Purwodadi</h1>
+  <p class="hero-sub">Construct 3 — Wound Healing Simulation • Tahun 2026</p>
+  <div class="hero-meta">
+    <span><span class="dot"></span>2 Tahap</span>
+    <span><span class="dot"></span>Juni–Juli 2026</span>
+    <span><span class="dot"></span>Construct 3</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ═══ 1. TAHAPAN UKG ═══ -->
+  <div class="card">
+    <div class="card-accent teal"></div>
+    <h2><span class="num teal">1</span> Tahapan UKG</h2>
+
+    <div class="stage-banner s1">
+      <span class="badge">TAHAP 1</span>
+      Pembuatan Project Construct 3
+      <span class="date">📅 27 Juni 2026 • 09.00–12.00</span>
+    </div>
+    <div class="two-col">
+      <div>
+        <span class="icon">🎯</span>
+        <h4 style="color:#2dd4bf">Aktivitas</h4>
+        <p>Membuat game/simulasi <strong>Wound Healing</strong> menggunakan Construct 3 berdasarkan studi kasus.</p>
+      </div>
+      <div>
+        <span class="icon">📤</span>
+        <h4 style="color:#c8a45c">Output</h4>
+        <p>File <strong>.c3p</strong> (project) + <strong>.html</strong> (export web).<br>Form ditutup pukul <strong>12.00</strong> — telat = tidak dinilai.</p>
+      </div>
+    </div>
+
+    <div class="stage-banner s2">
+      <span class="badge">TAHAP 2</span>
+      Video Penjelasan
+      <span class="date">📅 Deadline: 28 Juli 2026 • Pukul 09.00</span>
+    </div>
+    <div class="two-col">
+      <div>
+        <span class="icon">🎬</span>
+        <h4 style="color:#2dd4bf">Isi Video</h4>
+        <p>Proses pembuatan, logika berpikir, dan bagaimana produk menjadi solusi studi kasus.</p>
+      </div>
+      <div>
+        <span class="icon">📤</span>
+        <h4 style="color:#c8a45c">Output</h4>
+        <p>Link video (YouTube/Google Drive).<br>Durasi maksimal <strong>20 menit</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 2. STUDI KASUS ═══ -->
+  <div class="card">
+    <div class="card-accent pink"></div>
+    <h2><span class="num pink">2</span> Studi Kasus</h2>
+
+    <div class="story-box">
+      <div class="quote">📖 Cerita</div>
+      <p style="margin-top:8px">
+        Pak Fahim adalah seorang guru IPA kelas 8 di SMP IT Al Firdaus. Beliau mengalami kesulitan saat menjelaskan materi <strong>proses penutupan luka</strong> (wound healing) kepada siswa. Materi ini melibatkan banyak istilah dan mekanisme biologis yang abstrak — seperti peran trombosit, sel darah putih, fibrin, serta ancaman bakteri dan virus — sehingga siswa sulit membayangkan bagaimana proses ini terjadi di dalam tubuh.
+      </p>
+      <p style="margin-top:10px">
+        Pak Fahim ingin media yang <strong>interaktif dan visual</strong> agar siswa bisa melihat langsung bagaimana luka sembuh dan apa yang terjadi jika ada infeksi. Beliau kemudian meminta bantuan kepada Anda, guru ICT yang memahami Construct 3.
+      </p>
+      <p style="margin-top:10px;color:#2dd4bf;font-weight:600">
+        <strong>Tugas Anda:</strong> Buatlah game/simulasi interaktif menggunakan Construct 3 yang dapat memudahkan siswa kelas 8 memahami proses penutupan luka, lengkap dengan elemen penyembuh dan ancamannya.
+      </p>
+    </div>
+
+    <h3>Elemen yang Harus Ada</h3>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Kategori</th><th>Elemen</th><th>Peran dalam Simulasi</th></tr>
+      </thead>
+      <tbody>
+        <tr><td rowspan="3" style="border-bottom:1px solid rgba(200,164,92,.06)"><span class="tag tag-teal">Penyembuh</span></td><td>Trombosit</td><td>Auto-move ke luka, menambah progress penutupan</td></tr>
+        <tr><td>Sel Darah Putih</td><td>Dikontrol pemain, menangkap bakteri/virus</td></tr>
+        <tr><td>Fibrin</td><td>Power-up mempercepat penutupan luka</td></tr>
+        <tr><td rowspan="3"><span class="tag tag-red">Ancaman</span></td><td>Bakteri</td><td>Bergerak ke luka, menambah infeksi</td></tr>
+        <tr><td>Virus</td><td>Lebih cepat, mengurangi nyawa sel darah putih</td></tr>
+        <tr><td>Kotoran/Debris</td><td>Memperlambat progress penutupan</td></tr>
+        <tr><td><span class="tag tag-gold">Sistem</span></td><td>HUD + Layar Akhir</td><td>Progress %, infeksi, nyawa, kondisi menang/kalah</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- ═══ 3. ALUR GAMEPLAY ═══ -->
+  <div class="card">
+    <div class="card-accent gold"></div>
+    <h2><span class="num gold">3</span> Alur Gameplay</h2>
+    <p style="margin-bottom:12px">Game berjalan <strong>real-time</strong>. Berikut alur dari mulai hingga menang/kalah:</p>
+
+    <div class="layout-art" style="font-size:12px;background:rgba(0,0,0,.4);border-color:rgba(200,164,92,.08)">
+<span class="t"> MULAI</span>
+    │
+    ▼
+<span class="t"> ┌─────────────────────────────┐</span>
+<span class="t"> │ Trombosit auto-spawn        │</span>
+<span class="t"> │ (setiap ~3 detik dari tepi)  │</span>
+<span class="t"> └─────────────┬───────────────┘</span>
+                │ Bergerak otomatis ke luka
+                ▼
+<span class="t"> ┌─────────────────────────────┐</span>
+<span class="t"> │ Trombosit sampai di luka    │</span>
+<span class="t"> │ ──► Progress penutupan +5%  │</span>
+<span class="t"> └─────────────────────────────┘</span>
+
+<span class="g"> ┌─────────────────────────────┐</span>
+<span class="g"> │ Sel Darah Putih             │</span>
+<span class="g"> │ (dikontrol PEMAIN)          │</span>
+<span class="g"> │ mouse / keyboard / touch    │</span>
+<span class="g"> └─────────────┬───────────────┘</span>
+                │
+        ┌───────┴───────┐
+        ▼               ▼
+<span class="r"> Bakteri         Virus</span>
+<span class="r"> │               │</span>
+<span class="r"> ├─ kena luka    ├─ kena player</span>
+<span class="r"> │  → Infeksi +  │  → Nyawa -1</span>
+<span class="r"> │               │</span>
+<span class="r"> └─ tertangkap   └─ tertangkap</span>
+<span class="r">    SDP → skor +    SDP → skor +</span>
+
+<span class="p"> ⚡ Power-up (fibrin) muncul di milestone 25%, 50%, 75%</span>
+<span class="p">    Ambil → progress tambahan cepat</span>
+
+        ┌───────────┴───────────┐
+        ▼                       ▼
+<span class="gr"> ┌──────────────┐     ┌──────────────┐</span>
+<span class="gr"> │  Progress    │     │  Infeksi     │</span>
+<span class="gr"> │  = 100%      │     │  = 100%      │</span>
+<span class="gr"> │              │     │  ATAU        │</span>
+<span class="gr"> │  🏆 MENANG  │     │  Nyawa = 0   │</span>
+<span class="gr"> └──────────────┘     │              │</span>
+                       │  ❌ KALAH   │
+                       └──────────────┘
+    </div>
+  </div>
+  <!-- ═══ 4. KETENTUAN UJIAN ═══ -->
+  <div class="card">
+    <div class="card-accent red"></div>
+    <h2><span class="num red">4</span> Ketentuan Ujian</h2>
+
+    <div class="rules-grid">
+      <div class="rule-box allow">
+        <div class="rule-title">✅ BOLEH</div>
+        <ul>
+          <li>Menggunakan akun Construct 3 <strong>free tier</strong></li>
+          <li>Menggunakan sprite dari <strong>Asset Store gratis</strong> atau buat sendiri</li>
+          <li>Menambahkan fitur di luar mekanik minimal (power-up, level, animasi, suara, partikel)</li>
+          <li>Berkreasi bebas dalam desain, warna, dan tata letak</li>
+          <li>Menggunakan keyboard arrow keys sebagai alternatif kontrol mouse</li>
+          <li>Mencari referensi online selama pengerjaan</li>
+          <li><strong>Menggunakan AI</strong> (ChatGPT, Claude, Copilot, dll) — <strong>wajib</strong> melampirkan log percakapan dalam bentuk PDF</li>
+        </ul>
+      </div>
+      <div class="rule-box deny">
+        <div class="rule-title">❌ TIDAK BOLEH</div>
+        <ul>
+          <li>Menggunakan template project yang sudah jadi (dari nol)</li>
+          <li>Copy-paste event sheet dari peserta lain</li>
+          <li>Menggunakan asset berbayar tanpa lisensi</li>
+          <li>Mengirim project yang tidak bisa di-preview (error)</li>
+          <li>Menitipkan file ke peserta lain</li>
+          <li>Mengumpulkan <strong>setelah batas waktu</strong> yang ditentukan</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>📏 Spesifikasi Teknis Tahap 1</h3>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Parameter</th><th>Ketentuan</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Minimum Musuh</td><td>2 jenis: Bakteri + Virus (Kotoran opsional)</td></tr>
+        <tr><td>Sistem Nilai</td><td>Progress 0→100%, Infeksi, Nyawa</td></tr>
+        <tr><td>Bahasa</td><td>Indonesia</td></tr>
+        <tr><td>Export</td><td>.c3p (project) + .html (web preview)</td></tr>
+        <tr><td>Log AI <span style="color:#64748b;font-weight:400">(jika menggunakan)</span></td><td>Lampirkan file <strong>PDF</strong> berisi seluruh log percakapan dengan AI</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3>📏 Spesifikasi Teknis Tahap 2</h3>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Parameter</th><th>Ketentuan</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Durasi Video</td><td><strong>Maksimal 20 menit</strong></td></tr>
+        <tr><td>Format</td><td>Screen recording + suara, atau presentasi langsung + demo</td></tr>
+        <tr><td>File</td><td>Upload langsung file video ke form (.mp4, .mov, .webm — maks. 200MB)</td></tr>
+        <tr><td>Bahasa</td><td>Indonesia</td></tr>
+        <tr><td>Wajib mencakup</td><td>Proses pembuatan, logika berpikir, produk sebagai solusi</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- ═══ 5. KRITERIA PENILAIAN ═══ -->
+  <div class="card">
+    <div class="card-accent purple"></div>
+    <h2><span class="num purple">5</span> Kriteria Penilaian</h2>
+
+    <h3>Tahap 1 — Project <span style="color:#64748b;font-weight:400;font-size:13px">(Bobot 60%)</span></h3>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Aspek</th><th>Bobot</th><th>Indikator</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Fungsionalitas</td><td><span class="tag tag-gold">30%</span></td><td>Auto trombosit, kontrol player, musuh spawn, progress, win/lose</td></tr>
+        <tr><td>Logika &amp; Event Sheet</td><td><span class="tag tag-teal">25%</span></td><td>Variable, kondisi, timer, group events, bebas error</td></tr>
+        <tr><td>Kreativitas &amp; Visual</td><td><span class="tag tag-pink">20%</span></td><td>Desain sprite, warna, animasi, efek — bebas berkreasi</td></tr>
+        <tr><td>User Experience</td><td><span class="tag tag-purple">15%</span></td><td>Instruksi jelas, feedback, layar menang/kalah</td></tr>
+        <tr><td>Kebersihan Project</td><td><span class="tag tag-blue">10%</span></td><td>Penamaan rapi, event terkelompok, tidak ada orphan events</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h3 style="margin-top:20px">Tahap 2 — Video <span style="color:#64748b;font-weight:400;font-size:13px">(Bobot 40%)</span></h3>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>Aspek</th><th>Bobot</th><th>Indikator</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Proses Pembuatan</td><td><span class="tag tag-gold">35%</span></td><td>Menunjukkan alur kerja, event sheet, layout dengan jelas</td></tr>
+        <tr><td>Logika Berpikir</td><td><span class="tag tag-teal">35%</span></td><td>Menjelaskan alasan di balik mekanik dan cara kerja event</td></tr>
+        <tr><td>Produk sebagai Solusi</td><td><span class="tag tag-pink">30%</span></td><td>Hubungan project dengan studi kasus dan potensi media ajar</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- ═══ 6. FORM PENGUMPULAN ═══ -->
+  <div class="card" style="border-color:rgba(45,219,191,.2)">
+    <div class="card-accent green"></div>
+    <h2><span class="num green">6</span> Form Pengumpulan</h2>
+
+    <div class="form-section" id="form-tahap1">
+      <h3>📦 Tahap 1 — Project .c3p + .html</h3>
+      <div class="form-status" id="status-t1">⏳ Memeriksa waktu...</div>
+      <div style="margin-top:14px;text-align:center">
+        <p style="color:#94a3b8;margin-bottom:12px;font-size:13px">
+          Klik tombol di bawah untuk membuka form pengumpulan Tahap 1
+        </p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeENKPpprknDrQ4_BIUkfMaKBpReeXOPpm-i_WP8RSVaJfuog/viewform?usp=dialog"
+           target="_blank" rel="noopener"
+           class="btn-form" id="btn-form1"
+           style="display:inline-block;padding:16px 40px;background:linear-gradient(135deg,#2dd4bf,#14b8a6);color:#0a0e17;text-decoration:none;border-radius:12px;font-weight:700;font-size:16px;transition:transform .2s,opacity .2s">
+          📤 Buka Form Tahap 1
+        </a>
+      </div>
+    </div>
+
+    <div class="form-section" id="form-tahap2" style="margin-top:24px">
+      <h3>🎬 Tahap 2 — Video Penjelasan</h3>
+      <div class="form-status" id="status-t2">⏳ Memeriksa waktu...</div>
+      <div style="margin-top:14px;text-align:center">
+        <p style="color:#94a3b8;margin-bottom:12px;font-size:13px">
+          Klik tombol di bawah untuk membuka form pengumpulan Tahap 2
+        </p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfJv_ya79zJNyjW8uR_YkTP4MVxLAPqKZYYI9PPfELoXtdMiQ/viewform?usp=publish-editor"
+           target="_blank" rel="noopener"
+           class="btn-form" id="btn-form2"
+           style="display:inline-block;padding:16px 40px;background:linear-gradient(135deg,#c8a45c,#b8943c);color:#0a0e17;text-decoration:none;border-radius:12px;font-weight:700;font-size:16px;transition:transform .2s,opacity .2s">
+          🎬 Buka Form Tahap 2
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ 7. CATATAN ═══ -->
+  <div class="card">
+    <div class="card-accent blue"></div>
+    <h2><span class="num blue">7</span> Catatan Umum</h2>
+    <ul>
+      <li>Gunakan akun Construct 3 <strong>free tier</strong> — tidak perlu bayar</li>
+      <li>Buat project dari <strong>nol</strong> (New empty project) — tanpa template</li>
+      <li>Bebas berkreasi: tambah power-up, level, animasi, suara = nilai tambah</li>
+      <li>Nilai akhir = <strong>60% Tahap 1 + 40% Tahap 2</strong></li>
+      <li><strong>Keterlambatan = tidak dinilai</strong> — perhatikan batas waktu tiap tahap</li>
+      <li>Untuk bantuan teknis Construct 3, silakan hubungi panitia UKG</li>
+      <li><strong>Segala hal yang tidak diatur dalam SOP ini bersifat bebas</strong> — silakan berkreasi sesuai kreativitas dan kebutuhan masing-masing</li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="logo">SMP IT Al Firdaus Purwodadi</div>
+  <p>UKG ICT — Construct 3: Wound Healing Simulation • 2026</p>
+</div>
+
+<script>
+// ─── TIME CONFIG ───
+const T1_OPEN  = new Date('2026-06-01T00:00:00+07:00');
+const T1_CLOSE = new Date('2026-07-28T09:00:00+07:00');
+const T2_DEADLINE = new Date('2026-07-28T09:00:00+07:00');
+
+// ─── HELPERS ───
+function pad(n){return n<10?'0'+n:n}
+function fmtDate(d){
+  return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear()+
+    ' '+pad(d.getHours())+':'+pad(d.getMinutes())
+}
+
+function checkTime() {
+  const now = new Date();
+  const status1 = document.getElementById('status-t1');
+  const status2 = document.getElementById('status-t2');
+  const f1 = document.getElementById('form1-embed');
+  const f2 = document.getElementById('form2-embed');
+
+  // Tahap 1
+  if (now >= T1_OPEN && now < T1_CLOSE) {
+    status1.className = 'form-status open';
+    status1.innerHTML = '✅ Form terbuka — ' + fmtDate(T1_OPEN) + ' s/d ' + fmtDate(T1_CLOSE);
+    if (f1) f1.style.display = 'block';
+  } else if (now < T1_OPEN) {
+    status1.className = 'form-status closed';
+    status1.innerHTML = '🔒 Form akan dibuka pada ' + fmtDate(T1_OPEN);
+    if (f1) f1.style.display = 'none';
+  } else {
+    status1.className = 'form-status closed';
+    status1.innerHTML = '❌ Form ditutup (batas: ' + fmtDate(T1_CLOSE) + ')';
+    if (f1) f1.style.display = 'none';
+  }
+
+  // Tahap 2
+  if (now < T2_DEADLINE && now >= T1_OPEN) {
+    status2.className = 'form-status open';
+    status2.innerHTML = '✅ Form terbuka — deadline: ' + fmtDate(T2_DEADLINE);
+    if (f2) f2.style.display = 'block';
+  } else if (now < T1_OPEN) {
+    status2.className = 'form-status closed';
+    status2.innerHTML = '🔒 Form akan terbuka setelah Tahap 1 selesai';
+    if (f2) f2.style.display = 'none';
+  } else {
+    status2.className = 'form-status closed';
+    status2.innerHTML = '❌ Form ditutup (deadline: ' + fmtDate(T2_DEADLINE) + ')';
+    if (f2) f2.style.display = 'none';
+  }
+}
+
+// ─── INIT ───
+checkTime();
+setInterval(checkTime, 30000);
+</script>
+
+</body>
+</html>
